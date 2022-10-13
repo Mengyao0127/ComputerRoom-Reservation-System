@@ -9,6 +9,7 @@ using namespace std;
 #include "Student.h"
 #include "Teacher.h"
 #include <algorithm>
+#include "computerRoom.h"
 class Manager : public Identity
 {
 public:
@@ -45,4 +46,7 @@ public:
 	//teacher container
 	vector<Teacher> vTea;
 
+
+	//Computer Room Information
+	vector<ComputerRoom>vCom;
 };

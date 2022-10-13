@@ -2,6 +2,11 @@
 #include<iostream>
 using namespace std;
 #include "Identity.h"
+#include <string>
+#include <vector>
+#include"computerRoom.h"
+#include <fstream>
+#include"globalFile.h"
 
 //Student Class
 class Student : public Identity
@@ -26,5 +31,8 @@ public:
 	
 	//Student ID
 	int m_Id;
+	//computer room container
+	vector<ComputerRoom> vCom;
+
 
 };

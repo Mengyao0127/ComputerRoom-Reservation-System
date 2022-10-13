@@ -8,6 +8,57 @@ using namespace std;
 #include "Teacher.h"
 #include "Manager.h"
  
+//Enter the student submenu
+void studentMenu(Identity*& student)
+{
+	while (true)
+	{
+		//student menu
+		student->operMenu();
+
+		Student* stu = (Student*)student;
+		int select = 0;
+
+		cin >> select;
+
+		if (select == 1) //apply reservation
+		{
+			stu->applyOrder();
+		}
+		else if (select == 2) //view your order
+		{
+			stu->showMyOrder();
+		}
+		else if (select == 3) //view all order
+		{
+			stu->showAllOrder();
+		}
+		else if (select == 4) //cancel your order
+		{
+			stu->cancelOrder();
+		}
+		else
+		{
+			delete student;
+			cout << "Log out successfully!" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 //Enter the administrator submenu
 void managerMenu(Identity*& manager)
 {
@@ -124,7 +175,7 @@ void LoginIn(string fileName, int type)
 				system("cls");
 				person = new Student(id, name, pwd);
 				//Go to the Student Status submenu
-
+				studentMenu(person);
 				return;
 			}
 		}

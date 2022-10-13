@@ -12,8 +12,20 @@ Manager::Manager(string name, string pwd) {
 	this->m_Name = name;
 	this->m_Pwd = pwd;
 
-//Initialize the container
+//Initialize the container  get all files students¡¢teachers information
 	this->initVector();
+
+	//Initialize computer room information
+	ifstream ifs;
+	ifs.open(COMPUTER_FILE, ios::in);
+
+	ComputerRoom com;
+	while (ifs >> com.m_ComId && ifs >> com.m_MaxNum)
+	{
+		vCom.push_back(com);
+	}
+	ifs.close();
+	cout << "The number of rooms is:  "<< vCom.size() << endl;
 
 }
 
@@ -141,13 +153,23 @@ void Manager::showPerson() {
 
 //View computer room information
 void Manager::showComputer() {
-
+	cout << "The room information is as follows:  " << endl;
+	for (vector<ComputerRoom>::iterator it = vCom.begin(); it != vCom.end(); it++) {
+		cout << "Room number:  " << it->m_ComId << "The maximum capacity of the computer room:  " << it->m_MaxNum << endl;
+	}
+	system("pause");
+	system("cls");
 
 }
 
 //Clear appointment record
 void Manager::cleanFile() {
+	ofstream ofs(ORDER_FILE, ios::trunc);
+	ofs.close();
 
+	cout << "Cleared successfully!" << endl;
+	system("pause");
+	system("cls");
 
 }
 
