@@ -5,6 +5,7 @@ using namespace std;
 #include "globalFile.h"
 #include <map>
 #include<string>
+#include <fstream>
 
 class OrderFile
 {

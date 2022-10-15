@@ -3,7 +3,9 @@
 #include<iostream>
 using namespace std;
 #include "Identity.h"
-
+#include <string>
+#include "orderFile.h"
+#include <vector>
 //Teacher Class
 class Teacher : public Identity
 {

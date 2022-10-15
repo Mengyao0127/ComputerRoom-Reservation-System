@@ -125,20 +125,163 @@ void Student::applyOrder() {
 }
 //View your own appointment
 void Student::showMyOrder() {
+	OrderFile of;
+	if (of.m_Size == 0)
+	{
+		cout << "No appointment record" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	for (int i = 0; i < of.m_Size; i++)
+	{
+		//string converse to int
+		//string use .c_str() converse to const char *  
+		//use atoi (const char*) converse to int
+		if (atoi(of.m_orderData[i]["stuId"].c_str()) == this->m_Id)//Find your own appointment
+		{
+			cout << "Appointment Date: Week" << of.m_orderData[i]["date"];
+			cout << " Interval£º" << (of.m_orderData[i]["interval"] == "1" ? "morning" : "afternoon");
+			cout << "Computer room£º" << of.m_orderData[i]["roomId"];
+			string status = " Status£º ";  // 0 Cancelled appointment   1 under review   2 reserved -1 Appointment failed
+			if (of.m_orderData[i]["status"] == "1")
+			{
+				status += "under review";
+			}
+			else if (of.m_orderData[i]["status"] == "2")
+			{
+				status += "Appointment successful";
+			}
+			else if (of.m_orderData[i]["status"] == "-1")
+			{
+				status += "Approval failed, booking failed";
+			}
+			else
+			{
+				status += "Appointment cancelled";
+			}
+			cout << status << endl;
 
+		}
+	}
+
+	system("pause");
+	system("cls");
 
 
 }
 //View all appointment
 void Student::showAllOrder() {
+	OrderFile of;
+	if (of.m_Size == 0)
+	{
+		cout << "No appointment record" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
 
+	for (int i = 0; i < of.m_Size; i++)
+	{
+		cout << i + 1 << "¡¢ ";
+
+		cout << "Appointment Date: Week" << of.m_orderData[i]["date"];
+		cout << " Interval£º" << (of.m_orderData[i]["interval"] == "1" ? "morning" : "afternoon");
+		cout << " Student id£º" << of.m_orderData[i]["stuId"];
+		cout << " Name£º" << of.m_orderData[i]["stuName"];
+		cout << " Computer room£º" << of.m_orderData[i]["roomId"];
+		string status = " Status£º ";  // 0 Cancelled appointment   1 under review   2 reserved -1 Appointment failed
+		if (of.m_orderData[i]["status"] == "1")
+		{
+			status += "under review";
+		}
+		else if (of.m_orderData[i]["status"] == "2")
+		{
+			status += "Appointment successful";
+		}
+		else if (of.m_orderData[i]["status"] == "-1")
+		{
+			status += "Approval failed, booking failed";
+		}
+		else
+		{
+			status += "Appointment cancelled";
+		}
+		cout << status << endl;
+	}
+
+	system("pause");
+	system("cls");
 
 
 }
 //Cancel your appointment
 void Student::cancelOrder() {
 
+	OrderFile of;
+	if (of.m_Size == 0)
+	{
+		cout << "No appointment record" << endl;
+		system("pause");
+		system("cls");
+		return;
+	}
+	cout << "Records under review or reservations can be cancelled, please enter the cancelled record" << endl;
 
+	vector<int>v;
+	int index = 1;
+	for (int i = 0; i < of.m_Size; i++)
+	{
+		if (atoi(of.m_orderData[i]["stuId"].c_str()) == this->m_Id)  //First judge that it is your own student number
+		{
+			if (of.m_orderData[i]["status"] == "1" || of.m_orderData[i]["status"] == "2")  //Rescreen status Under review or appointment is successful
+			{
+				v.push_back(i);
+				cout << index++ << "¡¢ ";
+				cout << "Appointment Date: Week" << of.m_orderData[i]["date"];
+				cout << " Interval£º" << (of.m_orderData[i]["interval"] == "1" ? "ÉÏÎç" : "ÏÂÎç");
+				cout << " Computer room£º" << of.m_orderData[i]["roomId"];
+				string status = "Status£º ";  // 0 Cancelled appointment   1 under review   2 reserved  -1 Appointment failed
+				if (of.m_orderData[i]["status"] == "1")
+				{
+					status += "under review";
+				}
+				else if (of.m_orderData[i]["status"] == "2")
+				{
+					status += "Appointment successful";
+				}
+				cout << status << endl;
+
+			}
+		}
+	}
+
+	cout << "Please enter the canceled record, 0 means return" << endl;
+	int select = 0;
+	while (true)
+	{
+		cin >> select;
+		if (select >= 0 && select <= v.size())
+		{
+			if (select == 0)
+			{
+				break;
+			}
+			else
+			{
+				//	cout << "record location£º " << v[select - 1] << endl;
+				of.m_orderData[v[select - 1]]["status"] = "0";
+				of.updateOrder();
+				cout << "Appointment cancelled" << endl;
+				break;
+			}
+
+		}
+		cout << "Incorrect input, please try again" << endl;
+	}
+
+	system("pause");
+	system("cls");
 
 }
 

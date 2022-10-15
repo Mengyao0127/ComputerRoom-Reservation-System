@@ -48,7 +48,40 @@ void studentMenu(Identity*& student)
 	}
 }
 
+//Teacher Menu
+void TeacherMenu(Identity*& teacher)
+{
+	while (true)
+	{
+		//teacher menu
+		teacher->operMenu();
 
+		Teacher* tea = (Teacher*)teacher;
+		int select = 0;
+
+		cin >> select;
+
+		if (select == 1)
+		{
+			//View all appointments
+			tea->showAllOrder();
+		}
+		else if (select == 2)
+		{
+			//Review appointment
+			tea->validOrder();
+		}
+		else
+		{
+			delete teacher;
+			cout << "Logout succeeded!" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+
+	}
+}
 
 
 
@@ -194,7 +227,7 @@ void LoginIn(string fileName, int type)
 				system("cls");
 				person = new Teacher(id, name, pwd);
 				//Go to Teacher Submenu
-
+				TeacherMenu(person);
 				return;
 			}
 

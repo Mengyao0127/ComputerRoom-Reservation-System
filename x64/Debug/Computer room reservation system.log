@@ -1,6 +1,13 @@
 ﻿  Computer room reservation system.cpp
-C:\Users\M.Viriko\Desktop\新建文件夹\Computer room reservation system.cpp(65): fatal  error C1075: '{': no matching token found
+C:\Users\M.Viriko\Desktop\新建文件夹\Computer room reservation system.cpp(148): fatal  error C1075: '{': no matching token found
   Manager.cpp
+  orderFile.cpp
+C:\Users\M.Viriko\Desktop\新建文件夹\orderFile.cpp(36,27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\M.Viriko\Desktop\新建文件夹\orderFile.cpp(45,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\M.Viriko\Desktop\新建文件夹\orderFile.cpp(53,24): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\M.Viriko\Desktop\新建文件夹\orderFile.cpp(61,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\M.Viriko\Desktop\新建文件夹\orderFile.cpp(70,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\M.Viriko\Desktop\新建文件夹\orderFile.cpp(79,25): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Student.cpp
   Teacher.cpp
   Generating Code...

@@ -6,19 +6,19 @@ OrderFile::OrderFile()
 	ifstream ifs;
 	ifs.open(ORDER_FILE, ios::in);
 
-	string date;      //日期
-	string interval;  //时间段
-	string stuId;     //学生编号
-	string stuName;   //学生姓名
-	string roomId;    //机房编号
-	string status;    //预约状态
+	string date;      //date
+	string interval;  //interval
+	string stuId;     //student id 
+	string stuName;   //student name 
+	string roomId;    //room id 
+	string status;    //status
 
 
-	this->m_Size = 0; //预约记录个数
+	this->m_Size = 0; //Number of appointment records
 
 	while (ifs >> date && ifs >> interval && ifs >> stuId && ifs >> stuName && ifs >> roomId && ifs >> status)
 	{
-		//测试代码
+		//test code
 		/*
 		cout << date << endl;
 		cout << interval << endl;
@@ -32,7 +32,8 @@ OrderFile::OrderFile()
 		string value;
 		map<string, string> m;
 
-		int pos = date.find(":");
+		//Truncation interval
+		int pos = date.find(":");  //4
 		if (pos != -1)
 		{
 			key = date.substr(0, pos);
@@ -40,6 +41,7 @@ OrderFile::OrderFile()
 			m.insert(make_pair(key, value));
 		}
 
+		//Truncate name
 		pos = interval.find(":");
 		if (pos != -1)
 		{
@@ -64,6 +66,7 @@ OrderFile::OrderFile()
 			m.insert(make_pair(key, value));
 		}
 
+		//Intercept computer room information
 		pos = roomId.find(":");
 		if (pos != -1)
 		{
@@ -71,7 +74,8 @@ OrderFile::OrderFile()
 			value = roomId.substr(pos + 1, roomId.size() - pos - 1);
 			m.insert(make_pair(key, value));
 		}
-
+		
+		//Intercept state
 		pos = status.find(":");
 		if (pos != -1)
 		{
@@ -80,12 +84,12 @@ OrderFile::OrderFile()
 			m.insert(make_pair(key, value));
 		}
 
-
+		//Put a small map container into a large map container
 		this->m_orderData.insert(make_pair(this->m_Size, m));
 		this->m_Size++;
 	}
 
-	//测试代码
+	//test code
 	//for (map<int, map<string, string>>::iterator it = m_orderData.begin(); it != m_orderData.end();it++)
 	//{
 	//	cout << "key = " << it->first << " value = " << endl;
@@ -102,5 +106,21 @@ OrderFile::OrderFile()
 
 //Update appointment record
 void OrderFile::updateOrder() {
+	if (this->m_Size == 0)
+	{
+		return; //The reservation record is 0, return
+	}
+
+	ofstream ofs(ORDER_FILE, ios::out | ios::trunc);
+	for (int i = 0; i < m_Size; i++)
+	{
+		ofs << "date:" << this->m_orderData[i]["date"] << " ";
+		ofs << "interval:" << this->m_orderData[i]["interval"] << " ";
+		ofs << "stuId:" << this->m_orderData[i]["stuId"] << " ";
+		ofs << "stuName:" << this->m_orderData[i]["stuName"] << " ";
+		ofs << "roomId:" << this->m_orderData[i]["roomId"] << " ";
+		ofs << "status:" << this->m_orderData[i]["status"] << endl;
+	}
+	ofs.close();
 
 }
